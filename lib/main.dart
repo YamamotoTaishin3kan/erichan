@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'login_page.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -11,8 +13,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'ええやつ',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.cyan,
         ),
-        home: Center(child: Image.asset('picture/柴崎ツーショット.jpg')));
+        home: const LogInPage());
   }
 }
