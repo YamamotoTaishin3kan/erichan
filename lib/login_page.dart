@@ -30,9 +30,12 @@ class LogInPage extends StatelessWidget {
                   labelText: 'Password',
                 ),
               ),
-
-              //const ElevatedButton(onPressed: () {  }, 画面遷移やな
-              //child: null,),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, 'HomeScreen');
+                },
+                child: null,
+              ),
             ],
           ),
         ),
