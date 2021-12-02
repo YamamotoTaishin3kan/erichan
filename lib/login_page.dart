@@ -11,34 +11,34 @@ class LogInPage extends StatelessWidget {
         width: screenSize.width,
         height: screenSize.height,
         color: Colors.black,
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround, //Todo
-            children: const [
-              PageDescription(),
-              InputTextField("Name"),
-              InputTextField("Mail"),
-              ConfirmButton(),
-            ],
-          ),
+        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 80),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: const [
+            PageTitle(),
+            InputTextField("Name"),
+            InputTextField("Mail"),
+            CooperationTextButton(),
+            Center(child: ConfirmButton()),
+          ],
         ),
       ),
     );
   }
 }
 
-class PageDescription extends StatelessWidget {
-  const PageDescription({Key? key}) : super(key: key);
+class PageTitle extends StatelessWidget {
+  const PageTitle({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(5, 5, 30, 5), // もっといいのありそう
+      alignment: Alignment.topLeft,
       child: Text(
         "create account",
         style: TextStyle(
             color: Theme.of(context).primaryColor,
-            fontSize: 36,
+            fontSize: 32,
             fontWeight: FontWeight.bold),
       ),
     );
@@ -57,10 +57,22 @@ class InputTextField extends StatelessWidget {
         hintStyle: TextStyle(color: Theme.of(context).primaryColor),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Theme.of(context).primaryColor),
+          borderRadius: const BorderRadius.all(Radius.circular(10.0)),
         ),
         enabled: true,
       ),
     );
+  }
+}
+
+class CooperationTextButton extends StatelessWidget {
+  const CooperationTextButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text("google連携",
+        textAlign: TextAlign.left,
+        style: TextStyle(color: Theme.of(context).primaryColor));
   }
 }
 
@@ -69,13 +81,18 @@ class ConfirmButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        Navigator.pushNamed(context, 'HomeScreen');
-      },
-      child: const Text(
-        "次へ",
-        style: TextStyle(color: Colors.white),
+    return SizedBox(
+      width: 100,
+      height: 40,
+      child: ElevatedButton(
+        style: const ButtonStyle(),
+        onPressed: () {
+          Navigator.pushNamed(context, 'HomeScreen');
+        },
+        child: const Text(
+          "次へ",
+          style: TextStyle(color: Colors.white),
+        ),
       ),
     );
   }
