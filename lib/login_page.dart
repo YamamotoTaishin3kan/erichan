@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/src/provider.dart';
+import 'main.dart';
 
 class LogInPage extends StatelessWidget {
-  const LogInPage({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -16,8 +16,8 @@ class LogInPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: const [
             PageTitle(),
-            InputTextField("Name"),
             InputTextField("Mail"),
+            InputTextField("Password"),
             CooperationTextButton(),
             Center(child: ConfirmButton()),
           ],
@@ -48,10 +48,12 @@ class PageTitle extends StatelessWidget {
 class InputTextField extends StatelessWidget {
   const InputTextField(this._text);
   final String _text;
+
   @override
   Widget build(BuildContext context) {
     return TextField(
-      obscureText: true,
+      style: TextStyle(color: Theme.of(context).primaryColor),
+      obscureText: false,
       decoration: InputDecoration(
         hintText: _text,
         hintStyle: TextStyle(color: Theme.of(context).primaryColor),
@@ -61,6 +63,13 @@ class InputTextField extends StatelessWidget {
         ),
         enabled: true,
       ),
+      onChanged: (String inputText) {
+        if (_text == "Mail") {
+          context.read<UserProfile>().userEmail = inputText;
+        } else if (_text == "Password") {
+          context.read<UserProfile>().userPassword = inputText;
+        }
+      },
     );
   }
 }
