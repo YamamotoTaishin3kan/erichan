@@ -18,6 +18,11 @@ class UserProfile with ChangeNotifier {
     userEmail = newUserEmail;
     notifyListeners();
   }
+
+  void updatePassword(String newUserPassword) {
+    userPassword = newUserPassword;
+    notifyListeners();
+  }
 }
 
 class MyApp extends StatelessWidget {

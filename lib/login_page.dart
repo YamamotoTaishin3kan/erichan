@@ -1,3 +1,5 @@
+import 'package:erichan/home_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/src/provider.dart';
 import 'main.dart';
@@ -95,8 +97,26 @@ class ConfirmButton extends StatelessWidget {
       height: 40,
       child: ElevatedButton(
         style: const ButtonStyle(),
-        onPressed: () {
-          Navigator.pushNamed(context, 'HomeScreen');
+        onPressed: () async {
+          try {
+            // メール/パスワードでユーザー登録
+            final FirebaseAuth auth = FirebaseAuth.instance;
+            await auth.createUserWithEmailAndPassword(
+              email: context.read<UserProfile>().userEmail,
+              password: context.read<UserProfile>().userPassword,
+            );
+            // ユーザー登録に成功した場合
+            // チャット画面に遷移＋ログイン画面を破棄
+            await Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) {
+                return const HomeScreen();
+              }),
+            );
+          } catch (e) {
+            MaterialPageRoute(builder: (context) {
+              return const LoginErrorScreen();
+            });
+          }
         },
         child: const Text(
           "次へ",

@@ -18,3 +18,20 @@ class HomeScreen extends StatelessWidget {
         ));
   }
 }
+
+class LoginErrorScreen extends StatelessWidget {
+  const LoginErrorScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        color: Colors.blue,
+        child: Column(
+          children: [
+            Text("Authできていない"),
+            Text(context.read<UserProfile>().userEmail),
+            Text(context.read<UserProfile>().userPassword)
+          ],
+        ));
+  }
+}
