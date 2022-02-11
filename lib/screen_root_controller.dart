@@ -3,32 +3,25 @@ import 'home_screen.dart';
 import 'login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class ScreenRoot extends StatelessWidget {
-  const ScreenRoot({Key? key}) : super(key: key);
+class ScreenRootController extends StatelessWidget {
+  const ScreenRootController({Key? key}) : super(key: key);
+
   @override
-  Widget build(BuildContext context) {
-    String root;
-
-    FirebaseAuth auth = FirebaseAuth.instance;
-    auth.authStateChanges().listen((User? user) {
-      if (user == null) {
-        debugPrint('User is currently signed out!');
-        root = 'LogInPage';
-      } else {
-        debugPrint('User is signed in!');
-        root = 'HomeScreen';
-      }
-    });
-
-    return MaterialApp(
-      initialRoute: 'LogInPage',
-      routes: {
-        'LogInPage': (context) => LogInPage(),
-        'HomeScreen': (context) => const HomeScreen(),
-      },
-      theme: ThemeData(
-        primarySwatch: Colors.cyan,
-      ),
-    );
-  }
+  Widget build(BuildContext context) => MaterialApp(
+        title: 'Flutter app',
+        home: StreamBuilder<User?>(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const SizedBox();
+            }
+            if (snapshot.hasData) {
+              // User が null でなない、つまりサインイン済みのホーム画面へ
+              return HomeScreen();
+            }
+            // User が null である、つまり未サインインのサインイン画面へ
+            return LogInPage();
+          },
+        ),
+      );
 }

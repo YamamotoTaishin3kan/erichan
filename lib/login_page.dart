@@ -2,9 +2,11 @@ import 'package:erichan/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/src/provider.dart';
-import 'main.dart';
+import 'user_profile.dart';
 
 class LogInPage extends StatelessWidget {
+  const LogInPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -15,7 +17,7 @@ class LogInPage extends StatelessWidget {
         color: Colors.black,
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 80),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: const [
             PageTitle(),
             InputTextField("Mail"),
