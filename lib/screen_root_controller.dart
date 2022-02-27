@@ -1,6 +1,7 @@
+import 'package:erichan/sign_in.dart';
 import 'package:flutter/material.dart';
+import 'error_widget.dart';
 import 'home_screen.dart';
-import 'login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class ScreenRootController extends StatelessWidget {
@@ -8,19 +9,21 @@ class ScreenRootController extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialApp(
-        title: 'Flutter app',
         home: StreamBuilder<User?>(
           stream: FirebaseAuth.instance.authStateChanges(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const SizedBox();
+          builder: (context, user) {
+            switch (user.connectionState) {
+              case ConnectionState.none:
+                return const AuthError();
+              case ConnectionState.waiting:
+                return const CircularProgressIndicator();
+              case ConnectionState.active:
+                return user.hasData
+                    ? HomeScreen(user.data!)
+                    : const SignInPage();
+              case ConnectionState.done:
+                return const AuthError();
             }
-            if (snapshot.hasData) {
-              // User が null でなない、つまりサインイン済みのホーム画面へ
-              return HomeScreen();
-            }
-            // User が null である、つまり未サインインのサインイン画面へ
-            return LogInPage();
           },
         ),
       );
