@@ -1,4 +1,4 @@
-import 'package:erichan/user_auth/model/sign_in_button.dart';
+import 'package:erichan/user_auth/model/button.dart';
 import 'package:flutter/material.dart';
 import '../../firebase_adapter.dart';
 import 'email_form.dart';
@@ -33,7 +33,7 @@ class SignInScreen extends StatelessWidget {
             const ScreenTitle(titleName: 'SignInAccount'),
             _emailField,
             _passwordField,
-            Center(child: SignInButton(_confirmAction)),
+            Center(child: SignInButton(pressed: _confirmAction)),
             const Go2CreateAccountButton(),
           ],
         ),

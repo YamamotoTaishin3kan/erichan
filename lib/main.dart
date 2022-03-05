@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         home: Provider<EventBus>(
           create: (context) => EventBus(),
-          dispose: (context, bloc) => bloc.dispose(),
+          dispose: (context, bus) => bus.dispose(),
           child: const SignInScreenController(),
         ),
         theme: ThemeData(
