@@ -1,4 +1,4 @@
-import 'package:erichan/firebase_adapter.dart';
+import 'package:erichan/application/firebase_adapter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 

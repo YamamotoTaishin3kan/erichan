@@ -1,4 +1,4 @@
-import 'package:erichan/firebase_adapter.dart';
+import 'package:erichan/application/firebase_adapter.dart';
 import 'package:flutter/material.dart';
 import 'button.dart';
 import 'email_form.dart';

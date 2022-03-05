@@ -1,6 +1,6 @@
 import 'package:erichan/user_auth/model/button.dart';
 import 'package:flutter/material.dart';
-import '../../firebase_adapter.dart';
+import '../../application/firebase_adapter.dart';
 import 'email_form.dart';
 import 'go_to_create_account_button.dart';
 import 'password_form.dart';
