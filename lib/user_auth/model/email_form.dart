@@ -1,16 +1,20 @@
-import 'package:erichan/utilities/password.dart';
+import 'package:erichan/utilities/email.dart';
 import 'package:flutter/material.dart';
 
-class InputPassword extends StatelessWidget {
-  InputPassword({Key? key}) : super(key: key);
-  Password value = Password();
+// ignore: must_be_immutable
+class EmailForm extends StatelessWidget {
+  EmailForm({Key? key}) : super(key: key);
+  Email text = Email(text: '');
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       style: TextStyle(color: Theme.of(context).primaryColor),
       obscureText: false,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      validator: (value) => value!.isEmpty ? 'Email can\'t be empty' : null,
+      onChanged: (value) => text = Email(text: value),
       decoration: InputDecoration(
-        hintText: "password",
+        hintText: "email",
         hintStyle: TextStyle(color: Theme.of(context).primaryColor),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Theme.of(context).primaryColor),
@@ -18,9 +22,6 @@ class InputPassword extends StatelessWidget {
         ),
         enabled: true,
       ),
-      onChanged: (String text) {
-        value = Password(input: text);
-      },
     );
   }
 }

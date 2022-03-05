@@ -1,7 +1,5 @@
 class Password {
-  Password({String? input}) {
-    value = input;
-  }
+  Password({required this.text});
 
-  String? value;
+  String text;
 }

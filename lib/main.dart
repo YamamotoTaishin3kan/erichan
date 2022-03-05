@@ -1,5 +1,5 @@
-import 'package:erichan/screen_root_controller.dart';
-import 'package:erichan/user_profile.dart';
+import 'package:erichan/application/event_bus.dart';
+import 'package:erichan/user_auth/model/sign_in_screen_controller.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,13 +15,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: ChangeNotifierProvider(
-        create: (context) => UserProfile(),
-        child: const ScreenRootController(),
-      ),
-      theme: ThemeData(
-        primarySwatch: Colors.cyan,
-      ),
-    );
+        home: Provider<EventBus>(
+          create: (context) => EventBus(),
+          dispose: (context, bloc) => bloc.dispose(),
+          child: const SignInScreenController(),
+        ),
+        theme: ThemeData(
+          primarySwatch: Colors.cyan,
+        ));
   }
 }

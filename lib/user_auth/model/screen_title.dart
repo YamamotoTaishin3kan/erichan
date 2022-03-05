@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class PageTitle extends StatelessWidget {
-  const PageTitle({required this.titleName});
+class ScreenTitle extends StatelessWidget {
+  const ScreenTitle({required this.titleName});
   final String titleName;
   @override
   Widget build(BuildContext context) {
