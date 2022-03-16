@@ -1,29 +1,40 @@
-import 'package:erichan/application/firebase_adapter.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
-class HomeScreen extends StatelessWidget {
-  final User _user;
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
-  const HomeScreen(this._user, {Key? key}) : super(key: key);
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomeScreen> {
+  final ImagePicker _picker = ImagePicker();
+  File? _file;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('HomeScreen'),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () => FirebaseAdapter.signOut(),
-          ),
+        title: const Text('Image Picker'),
+      ),
+      body: Column(
+        children: [
+          if (_file != null)
+            Image.file(
+              _file!,
+              fit: BoxFit.cover,
+            ),
+          OutlinedButton(
+              onPressed: () async {
+                final XFile? _image =
+                    await _picker.pickImage(source: ImageSource.gallery);
+                _file = File(_image!.path);
+                setState(() {});
+              },
+              child: const Text('画像を選択'))
         ],
-      ),
-      body: Center(
-        child: Text('ログイン情報：${_user.email}'),
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
-        onPressed: () async {},
       ),
     );
   }

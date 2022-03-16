@@ -6,11 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'create_account.dart';
 import '../../error_widget.dart';
-import '../../home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class SignInScreenController extends StatelessWidget {
-  const SignInScreenController({Key? key}) : super(key: key);
+  const SignInScreenController(this._authenticated, {Key? key})
+      : super(key: key);
+  final Widget _authenticated;
 
   @override
   Widget build(BuildContext context) => StreamBuilder<User?>(
@@ -22,9 +23,7 @@ class SignInScreenController extends StatelessWidget {
             case ConnectionState.waiting:
               return const CircularProgressIndicator();
             case ConnectionState.active:
-              return user.hasData
-                  ? HomeScreen(user.data!)
-                  : const InitialScreen();
+              return user.hasData ? _authenticated : const InitialScreen();
             case ConnectionState.done:
               return const AuthError();
           }
