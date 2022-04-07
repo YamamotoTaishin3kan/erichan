@@ -1,11 +1,13 @@
 import 'package:erichan/user_auth/model/sign_in_screen_controller.dart';
+import 'package:flutter/material.dart';
 import '../home_screen.dart';
 import '../main.dart';
+import 'Screen_transition_animation.dart';
 
 class DependencyInjector {
   final DependencyContainer _container = DependencyContainer();
 
-  MyApp getApplication() {
+  Widget getApplication() {
     return _container.resolve<MyApp>();
   }
 }
@@ -14,16 +16,16 @@ class DependencyContainer {
   DependencyContainer();
   final Map<Type, Object> _container = {};
 
-  MyApp getApplication() {
+  Widget getApplication() {
     return resolve<MyApp>();
   }
 
-  T resolve<T>() {
+  Widget resolve<T>() {
     if (_container.containsKey(T)) {
-      return _container[T]! as T;
+      return _container[T]! as Widget;
     } else {
       register<T>();
-      return _container[T]! as T;
+      return _container[T]! as Widget;
     }
   }
 
@@ -36,7 +38,7 @@ class DependencyContainer {
         _container[T] = SignInScreenController(resolve<HomeScreen>());
         break;
       case HomeScreen:
-        _container[T] = const HomeScreen();
+        _container[T] = HomeScreen();
         break;
       default:
     }
