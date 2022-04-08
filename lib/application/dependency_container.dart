@@ -35,10 +35,10 @@ class DependencyContainer {
         _container[T] = MyApp(resolve<SignInScreenController>());
         break;
       case SignInScreenController:
-        _container[T] = SignInScreenController(resolve<HomeScreen>());
+        _container[T] = SignInScreenController(resolve<Administrator>());
         break;
-      case HomeScreen:
-        _container[T] = HomeScreen();
+      case Administrator:
+        _container[T] = const Administrator();
         break;
       default:
     }
