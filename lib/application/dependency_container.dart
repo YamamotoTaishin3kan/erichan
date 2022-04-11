@@ -1,6 +1,6 @@
 import 'package:erichan/user_auth/model/sign_in_screen_controller.dart';
 import 'package:flutter/material.dart';
-import '../home_screen.dart';
+import '../administrator/home_screen.dart';
 import '../main.dart';
 import 'Screen_transition_animation.dart';
 
