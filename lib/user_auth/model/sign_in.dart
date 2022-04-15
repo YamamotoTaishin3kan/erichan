@@ -1,10 +1,10 @@
-import 'package:erichan/user_auth/model/button.dart';
+import 'package:erichan/user_auth/infrastructure/button.dart';
+import 'package:erichan/user_auth/infrastructure/go_to_create_account_button.dart';
+import 'package:erichan/user_auth/infrastructure/password_form.dart';
 import 'package:flutter/material.dart';
 import '../../application/firebase_adapter.dart';
-import 'email_form.dart';
-import 'go_to_create_account_button.dart';
-import 'password_form.dart';
-import 'screen_title.dart';
+import '../infrastructure/email_form.dart';
+import '../infrastructure/screen_title.dart';
 
 class SignInScreen extends StatelessWidget {
   SignInScreen({Key? key}) : super(key: key);

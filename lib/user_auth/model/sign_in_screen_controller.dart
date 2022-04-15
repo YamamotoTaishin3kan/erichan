@@ -1,6 +1,6 @@
 import 'package:erichan/application/event_bus.dart';
-import 'package:erichan/user_auth/event/go_to_create_account_event.dart';
-import 'package:erichan/user_auth/event/go_to_sign_in_event.dart';
+import 'package:erichan/user_auth/entities/event/go_to_create_account_event.dart';
+import 'package:erichan/user_auth/entities/event/go_to_sign_in_event.dart';
 import 'package:erichan/user_auth/model/sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

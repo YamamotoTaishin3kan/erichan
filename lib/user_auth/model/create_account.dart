@@ -1,10 +1,10 @@
 import 'package:erichan/application/firebase_adapter.dart';
+import 'package:erichan/user_auth/infrastructure/go_to_sign_in_button.dart';
+import 'package:erichan/user_auth/infrastructure/password_form.dart';
 import 'package:flutter/material.dart';
-import 'button.dart';
-import 'email_form.dart';
-import 'go_to_sign_in_button.dart';
-import 'password_form.dart';
-import 'screen_title.dart';
+import '../infrastructure/button.dart';
+import '../infrastructure/email_form.dart';
+import '../infrastructure/screen_title.dart';
 
 class CreateAccountScreen extends StatelessWidget {
   CreateAccountScreen({Key? key}) : super(key: key);

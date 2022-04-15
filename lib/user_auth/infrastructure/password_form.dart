@@ -1,4 +1,4 @@
-import 'package:erichan/utilities/password.dart';
+import 'package:erichan/user_auth/entities/password.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable

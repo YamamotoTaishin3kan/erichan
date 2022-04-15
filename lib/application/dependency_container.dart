@@ -1,8 +1,7 @@
 import 'package:erichan/user_auth/model/sign_in_screen_controller.dart';
 import 'package:flutter/material.dart';
-import '../administrator/home_screen.dart';
+import '../administrator/model/home_screen.dart';
 import '../main.dart';
-import 'Screen_transition_animation.dart';
 
 class DependencyInjector {
   final DependencyContainer _container = DependencyContainer();
@@ -35,10 +34,10 @@ class DependencyContainer {
         _container[T] = MyApp(resolve<SignInScreenController>());
         break;
       case SignInScreenController:
-        _container[T] = SignInScreenController(resolve<Administrator>());
+        _container[T] = SignInScreenController(resolve<AdministratorBuilder>());
         break;
-      case Administrator:
-        _container[T] = const Administrator();
+      case AdministratorBuilder:
+        _container[T] = const AdministratorBuilder();
         break;
       default:
     }

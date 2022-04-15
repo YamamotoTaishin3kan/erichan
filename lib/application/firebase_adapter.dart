@@ -1,5 +1,5 @@
-import 'package:erichan/utilities/email.dart';
-import 'package:erichan/utilities/password.dart';
+import 'package:erichan/user_auth/entities/email.dart';
+import 'package:erichan/user_auth/entities/password.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseAdapter {

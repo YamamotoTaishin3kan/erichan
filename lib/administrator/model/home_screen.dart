@@ -1,12 +1,12 @@
-import 'package:erichan/administrator/repository.dart';
+import 'package:erichan/administrator/model/repository.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:reorderables/reorderables.dart';
-import 'chameleon_card.dart';
+import 'eri_card.dart';
+import 'widget_to_create_new_item.dart';
 
-class Administrator extends StatelessWidget {
-  const Administrator({Key? key}) : super(key: key);
+class AdministratorBuilder extends StatelessWidget {
+  const AdministratorBuilder({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,29 +32,36 @@ class AdministratorStructure extends StatelessWidget {
     Widget cards = ReorderableWrap(
       runSpacing: 10.0,
       padding: const EdgeInsets.all(10),
-      children: _repository.items,
+      children: _repository.infos
+          .map((cardInfo) =>
+              EriCard(key: ValueKey(cardInfo.title), info: cardInfo))
+          .toList(),
       onReorder: _onReorder,
     );
 
-    Widget column = Column(
-      children: <Widget>[cards],
-    );
+    Widget column = Column(children: <Widget>[cards]);
 
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(child: column),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.amber,
-        child: const Icon(Icons.add),
-        onPressed: () {
-          keynNumber++;
-          var newTile = ChameleonCard(
-              key: ValueKey(keynNumber), text: keynNumber.toString());
-          _repository.addNewItem(newTile);
-        },
-      ),
+      floatingActionButton: CreateNewItemButton(context),
     );
   }
+}
+
+class CreateNewItemButton extends FloatingActionButton {
+  CreateNewItemButton(BuildContext context, {Key? key})
+      : super(
+          key: key,
+          backgroundColor: Colors.amber,
+          child: const Icon(Icons.add),
+          onPressed: () {
+            showDialog<void>(
+              context: context,
+              builder: (_) => const WidgetToCreateNewItem(),
+            );
+          },
+        );
 }
 
 // class _HomePageState extends State<HomeScreen> {
