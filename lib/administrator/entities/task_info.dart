@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-DateTime today = DateTime.now().add(const Duration(days: 1));
-DateTime tomorrow = DateTime.now().add(const Duration(days: 1));
+DateTime today = DateTime.now();
+final DateTime tomorrow = DateTime.now().add(const Duration(days: 1));
 
 abstract class InfoBase {
   InfoBase({required this.title});
@@ -10,14 +10,18 @@ abstract class InfoBase {
 }
 
 class TaskInfo extends InfoBase {
-  TaskInfo({required title, required this.detail}) : super(title: title);
+  TaskInfo({
+    required title,
+    required this.detail,
+    required this.deadline,
+  }) : super(title: title);
 
   String detail;
-  DateTime deadline = tomorrow;
+  final DateTime deadline;
 }
 
 class AlbumInfo extends InfoBase {
-  AlbumInfo({required title}) : super(title: title);
+  AlbumInfo({required title, travelDate}) : super(title: title);
 
   DateTime travelDate = today;
   List<Image> pictures = [];

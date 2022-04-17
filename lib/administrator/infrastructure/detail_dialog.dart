@@ -17,13 +17,13 @@ class DetailDialog extends StatelessWidget {
         side: BorderSide(color: color, width: 2),
         borderRadius: BorderRadius.circular(10),
       ),
-      children: detailDialogBody(),
+      children: detailDialogBody(context),
     );
   }
 
-  List<Widget> detailDialogBody() {
+  List<Widget> detailDialogBody(BuildContext context) {
     if (info is TaskInfo) {
-      return taskDetail();
+      return taskDetail(context);
     } else if (info is AlbumInfo) {
       return albumDetail();
     } else {
@@ -31,7 +31,7 @@ class DetailDialog extends StatelessWidget {
     }
   }
 
-  List<Widget> taskDetail() {
+  List<Widget> taskDetail(BuildContext context) {
     List<Widget> value = [
       Center(
         child: Padding(
@@ -48,7 +48,9 @@ class DetailDialog extends StatelessWidget {
                 onPrimary: Colors.white,
                 shape: const StadiumBorder(),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context);
+              },
             )),
       ),
     ];

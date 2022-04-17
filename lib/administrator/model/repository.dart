@@ -9,7 +9,8 @@ class Repository extends ChangeNotifier {
   late List<InfoBase> infos = [];
 
   void initialize() {
-    infos.add(TaskInfo(title: "taishinおしっこ行きたい", detail: '最初の情報です'));
+    infos.add(TaskInfo(
+        title: "taishinおしっこ行きたい", detail: '最初の情報です', deadline: tomorrow));
   }
 
   void changePriority(int oldIndex, int newIndex) {

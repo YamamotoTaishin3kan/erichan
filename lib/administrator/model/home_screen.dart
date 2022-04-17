@@ -11,9 +11,7 @@ class AdministratorBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<Repository>(
-        create: (context) {
-          return Repository();
-        },
+        create: (context) => Repository(),
         child: const AdministratorStructure());
   }
 }
@@ -44,25 +42,31 @@ class AdministratorStructure extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(child: column),
-      floatingActionButton: CreateNewItemButton(context),
+      floatingActionButton: const CreateNewItemButton(),
     );
   }
 }
 
-class CreateNewItemButton extends FloatingActionButton {
-  CreateNewItemButton(BuildContext context, {Key? key})
-      : super(
-          key: key,
-          backgroundColor: Colors.amber,
-          child: const Icon(Icons.add),
-          onPressed: () {
-            showDialog<void>(
-              context: context,
-              builder: (_) => const WidgetToCreateNewItem(),
-            );
-          },
+class CreateNewItemButton extends StatelessWidget {
+  const CreateNewItemButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final Repository _repository = Provider.of<Repository>(context);
+    return FloatingActionButton(
+      key: key,
+      backgroundColor: Colors.amber,
+      child: const Icon(Icons.add),
+      onPressed: () {
+        showDialog<void>(
+          context: context,
+          builder: (_) => WidgetToCreateNewItem(repository: _repository),
         );
+      },
+    );
+  }
 }
+
 
 // class _HomePageState extends State<HomeScreen> {
 //   final ImagePicker _picker = ImagePicker();

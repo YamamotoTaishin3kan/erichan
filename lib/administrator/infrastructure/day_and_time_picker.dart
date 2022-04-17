@@ -5,10 +5,10 @@ class DayAndTimePicker extends StatefulWidget {
   const DayAndTimePicker({Key? key}) : super(key: key);
 
   @override
-  State<DayAndTimePicker> createState() => _DayAndTimePickerState();
+  State<DayAndTimePicker> createState() => DayAndTimePickerState();
 }
 
-class _DayAndTimePickerState extends State<DayAndTimePicker> {
+class DayAndTimePickerState extends State<DayAndTimePicker> {
   DateTime time = DateTime.now();
 
   void _showDialog(Widget child) {
