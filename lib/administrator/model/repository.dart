@@ -1,6 +1,9 @@
 import 'package:erichan/administrator/entities/task_info.dart';
 import 'package:flutter/material.dart';
 
+// singleton
+Repository currentRepository = Repository();
+
 class Repository extends ChangeNotifier {
   Repository() {
     initialize();
@@ -24,8 +27,8 @@ class Repository extends ChangeNotifier {
     notifyListeners();
   }
 
-  void removeInfo(int index) {
-    infos.removeAt(index);
+  void remove(InfoBase target) {
+    infos.remove(target);
     notifyListeners();
   }
 }

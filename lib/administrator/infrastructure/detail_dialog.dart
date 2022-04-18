@@ -1,3 +1,4 @@
+import 'package:erichan/administrator/model/repository.dart';
 import 'package:flutter/material.dart';
 import '../../application/app_define.dart';
 import '../entities/task_info.dart';
@@ -42,7 +43,7 @@ class DetailDialog extends StatelessWidget {
         child: SizedBox(
             width: 100,
             child: ElevatedButton(
-              child: const Text('完了'),
+              child: const Text('削除'),
               style: ElevatedButton.styleFrom(
                 primary: color,
                 onPrimary: Colors.white,
@@ -50,6 +51,7 @@ class DetailDialog extends StatelessWidget {
               ),
               onPressed: () {
                 Navigator.pop(context);
+                currentRepository.remove(info);
               },
             )),
       ),

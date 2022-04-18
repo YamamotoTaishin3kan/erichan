@@ -7,8 +7,7 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class WidgetToCreateNewItem extends StatelessWidget {
-  WidgetToCreateNewItem(
-      {Key? key, this.color = Colors.black, required this.repository})
+  WidgetToCreateNewItem({Key? key, this.color = Colors.black})
       : super(key: key);
 
   void _pushed() {
@@ -16,11 +15,10 @@ class WidgetToCreateNewItem extends StatelessWidget {
         title: _titleInputForm.text,
         detail: _itemDetailsInputForm.text,
         deadline: _dayAndTimePickerKey.currentState?.time ?? today);
-    repository.addNewInfo(newInfo);
+    currentRepository.addNewInfo(newInfo);
   }
 
   final Color color;
-  final Repository repository;
   final TitleInputForm _titleInputForm = TitleInputForm();
   final ItemDetailsInputForm _itemDetailsInputForm = ItemDetailsInputForm();
   late GlobalObjectKey<DayAndTimePickerState> _dayAndTimePickerKey;

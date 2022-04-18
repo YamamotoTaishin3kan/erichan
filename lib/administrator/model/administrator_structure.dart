@@ -5,32 +5,19 @@ import 'package:reorderables/reorderables.dart';
 import 'eri_card.dart';
 import 'widget_to_create_new_item.dart';
 
-class AdministratorBuilder extends StatelessWidget {
-  const AdministratorBuilder({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ChangeNotifierProvider<Repository>(
-        create: (context) => Repository(),
-        child: const AdministratorStructure());
-  }
-}
-
 class AdministratorStructure extends StatelessWidget {
   const AdministratorStructure({Key? key}) : super(key: key);
-  static int keynNumber = 0;
 
   @override
   Widget build(BuildContext context) {
-    final Repository _repository = Provider.of<Repository>(context);
-
     void _onReorder(int oldIndex, int newIndex) =>
-        _repository.changePriority(oldIndex, newIndex);
+        currentRepository.changePriority(oldIndex, newIndex);
 
     Widget cards = ReorderableWrap(
       runSpacing: 10.0,
       padding: const EdgeInsets.all(10),
-      children: _repository.infos
+      children: Provider.of<Repository>(context)
+          .infos
           .map((cardInfo) =>
               EriCard(key: ValueKey(cardInfo.title), info: cardInfo))
           .toList(),
@@ -52,7 +39,6 @@ class CreateNewItemButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Repository _repository = Provider.of<Repository>(context);
     return FloatingActionButton(
       key: key,
       backgroundColor: Colors.amber,
@@ -60,7 +46,7 @@ class CreateNewItemButton extends StatelessWidget {
       onPressed: () {
         showDialog<void>(
           context: context,
-          builder: (_) => WidgetToCreateNewItem(repository: _repository),
+          builder: (_) => WidgetToCreateNewItem(),
         );
       },
     );
