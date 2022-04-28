@@ -10,6 +10,6 @@ class AdministratorLifeCycle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<Repository>(
-        create: (context) => currentRepository, child: child);
+        create: (context) => localRepository, child: child);
   }
 }

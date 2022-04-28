@@ -51,7 +51,7 @@ class DetailDialog extends StatelessWidget {
               ),
               onPressed: () {
                 Navigator.pop(context);
-                currentRepository.remove(info);
+                localRepository.remove(info);
               },
             )),
       ),

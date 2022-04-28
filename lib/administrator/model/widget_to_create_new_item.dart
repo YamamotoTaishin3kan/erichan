@@ -15,7 +15,7 @@ class WidgetToCreateNewItem extends StatelessWidget {
         title: _titleInputForm.text,
         detail: _itemDetailsInputForm.text,
         deadline: _dayAndTimePickerKey.currentState?.time ?? today);
-    currentRepository.addNewInfo(newInfo);
+    localRepository.addNewInfo(newInfo);
   }
 
   final Color color;

@@ -11,7 +11,7 @@ class AdministratorStructure extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     void _onReorder(int oldIndex, int newIndex) =>
-        currentRepository.changePriority(oldIndex, newIndex);
+        localRepository.changePriority(oldIndex, newIndex);
 
     Widget cards = ReorderableWrap(
       runSpacing: 10.0,
