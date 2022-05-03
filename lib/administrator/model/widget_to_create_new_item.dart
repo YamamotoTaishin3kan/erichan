@@ -14,7 +14,8 @@ class WidgetToCreateNewItem extends StatelessWidget {
     TaskInfo newInfo = TaskInfo(
         title: _titleInputForm.text,
         detail: _itemDetailsInputForm.text,
-        deadline: _dayAndTimePickerKey.currentState?.time ?? today);
+        deadline: _dayAndTimePickerKey.currentState?.time ?? today,
+        docID: "FireStoreDon'tKnow");
     localRepository.addNewInfo(newInfo);
   }
 

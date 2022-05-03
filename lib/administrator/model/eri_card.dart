@@ -55,13 +55,14 @@ class TaskCardBody extends StatelessWidget {
           child: Text(
             "残り　" + timeLeft(),
             textAlign: TextAlign.right,
-            style: const StandardTextStyle(color: Colors.red),
+            style:
+                const StandardTextStyle(color: Color.fromARGB(255, 226, 15, 0)),
           )),
     ]);
   }
 
   String timeLeft() {
-    Duration timeLeft = DateTime.now().difference(info.deadline);
+    Duration timeLeft = info.deadline.difference(DateTime.now());
     if (timeLeft.inDays > 0) {
       return daysLeft(timeLeft);
     } else {
