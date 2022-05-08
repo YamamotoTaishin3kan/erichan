@@ -1,4 +1,4 @@
-import 'package:erichan/application/firebase_adapter.dart';
+import 'package:erichan/application/firebase_auth_adapter.dart';
 import 'package:erichan/user_auth/infrastructure/go_to_sign_in_button.dart';
 import 'package:erichan/user_auth/infrastructure/password_form.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +13,7 @@ class CreateAccountScreen extends StatelessWidget {
   final PasswordForm _passwordField = PasswordForm();
 
   void _confirmAction() {
-    FirebaseAdapter.createUserWithEmailAndPassword(
+    FirebaseAuthAdapter.createUserWithEmailAndPassword(
         email: _emailField.text, password: _passwordField.text);
   }
 
