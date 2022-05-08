@@ -45,6 +45,7 @@ dependencies:
   animated_button: ^0.2.0
   flutter_localizations:
     sdk: flutter
+  flutter_local_notifications: ^9.5.2
 
 dev_dependencies:
   flutter_test:

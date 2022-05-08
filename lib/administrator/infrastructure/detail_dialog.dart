@@ -1,6 +1,8 @@
 import 'package:erichan/administrator/model/repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import '../../application/app_define.dart';
+import '../../main.dart';
 import '../entities/task_info.dart';
 
 class DetailDialog extends StatelessWidget {
@@ -50,6 +52,8 @@ class DetailDialog extends StatelessWidget {
                 shape: const StadiumBorder(),
               ),
               onPressed: () {
+                setNotification();
+
                 Navigator.pop(context);
                 localRepository.remove(info);
               },
@@ -57,6 +61,21 @@ class DetailDialog extends StatelessWidget {
       ),
     ];
     return value;
+  }
+
+  void setNotification() async {
+    const IOSNotificationDetails iOSPlatformChannelSpecifics =
+        IOSNotificationDetails(
+            // sound: 'example.mp3',
+            presentAlert: true,
+            presentBadge: true,
+            presentSound: true);
+    NotificationDetails platformChannelSpecifics = const NotificationDetails(
+      iOS: iOSPlatformChannelSpecifics,
+      android: null,
+    );
+    // await flutterLocalNotificationsPlugin.show(
+    //     0, 'title', 'body', platformChannelSpecifics);
   }
 
   List<Widget> albumDetail() {
