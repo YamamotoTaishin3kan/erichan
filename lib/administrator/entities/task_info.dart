@@ -1,7 +1,5 @@
+import 'package:erichan/utilities/deadline.dart';
 import 'package:flutter/material.dart';
-
-DateTime today = DateTime.now();
-final DateTime tomorrow = DateTime.now().add(const Duration(days: 1));
 
 abstract class InfoBase {
   InfoBase({required this.title, required this.docID});
@@ -18,8 +16,8 @@ class TaskInfo extends InfoBase {
     required docID,
   }) : super(title: title, docID: docID);
 
-  String detail;
-  final DateTime deadline;
+  final String detail;
+  final Deadline deadline;
 }
 
 class AlbumInfo extends InfoBase {

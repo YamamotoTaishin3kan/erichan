@@ -3,6 +3,7 @@ import 'package:erichan/administrator/infrastructure/item_details_input_form.dar
 import 'package:erichan/administrator/infrastructure/day_and_time_picker.dart';
 import 'package:erichan/administrator/infrastructure/title_input_form.dart';
 import 'package:erichan/administrator/model/repository.dart';
+import 'package:erichan/utilities/deadline.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -14,7 +15,7 @@ class WidgetToCreateNewItem extends StatelessWidget {
     TaskInfo newInfo = TaskInfo(
         title: _titleInputForm.text,
         detail: _itemDetailsInputForm.text,
-        deadline: _dayAndTimePickerKey.currentState?.time ?? today,
+        deadline: Deadline(_dayAndTimePickerKey.currentState?.time ?? today),
         docID: "FireStoreDon'tKnow");
     localRepository.addNewInfo(newInfo);
   }

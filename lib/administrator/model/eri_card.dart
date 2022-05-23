@@ -53,29 +53,12 @@ class TaskCardBody extends StatelessWidget {
       SizedBox(
           width: MediaQuery.of(context).size.width,
           child: Text(
-            "残り　" + timeLeft(),
+            info.deadline.getTimeLeft(),
             textAlign: TextAlign.right,
             style:
                 const StandardTextStyle(color: Color.fromARGB(255, 226, 15, 0)),
           )),
     ]);
-  }
-
-  String timeLeft() {
-    Duration timeLeft = info.deadline.difference(DateTime.now());
-    if (timeLeft.inDays > 0) {
-      return daysLeft(timeLeft);
-    } else {
-      return hourLeft(timeLeft);
-    }
-  }
-
-  String daysLeft(Duration timeLeft) {
-    return timeLeft.inDays.toString() + "日";
-  }
-
-  String hourLeft(Duration timeLeft) {
-    return timeLeft.inHours.toString() + "時間";
   }
 }
 

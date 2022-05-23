@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:erichan/administrator/entities/task_info.dart';
+import 'package:erichan/utilities/deadline.dart';
 
 class FireStoreAdapter {
   final repositoryCollection =
@@ -20,7 +21,7 @@ class FireStoreAdapter {
       return TaskInfo(
           title: remoteItem["item"]["title"],
           detail: remoteItem["item"]["detail"],
-          deadline: DateTime(year, month, day, hour, minute),
+          deadline: Deadline(DateTime(year, month, day, hour, minute)),
           docID: document.id);
     }).toList();
   }
@@ -31,11 +32,11 @@ class FireStoreAdapter {
         'title': newItem.title,
         'detail': newItem.detail,
         'dateTime': {
-          'day': newItem.deadline.day,
-          'hour': newItem.deadline.hour,
-          'minute': newItem.deadline.minute,
-          'month': newItem.deadline.month,
-          'year': newItem.deadline.year,
+          'day': newItem.deadline.dateTime.day,
+          'hour': newItem.deadline.dateTime.hour,
+          'minute': newItem.deadline.dateTime.minute,
+          'month': newItem.deadline.dateTime.month,
+          'year': newItem.deadline.dateTime.year,
         },
       }
     };

@@ -1,8 +1,7 @@
 import 'package:erichan/administrator/model/repository.dart';
+import 'package:erichan/application/notifications_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import '../../application/app_define.dart';
-import '../../main.dart';
 import '../entities/task_info.dart';
 
 class DetailDialog extends StatelessWidget {
@@ -45,15 +44,13 @@ class DetailDialog extends StatelessWidget {
         child: SizedBox(
             width: 100,
             child: ElevatedButton(
-              child: const Text('削除'),
+              child: const Text('完了'),
               style: ElevatedButton.styleFrom(
                 primary: color,
                 onPrimary: Colors.white,
                 shape: const StadiumBorder(),
               ),
               onPressed: () {
-                setNotification();
-
                 Navigator.pop(context);
                 localRepository.remove(info);
               },
@@ -61,21 +58,6 @@ class DetailDialog extends StatelessWidget {
       ),
     ];
     return value;
-  }
-
-  void setNotification() async {
-    const IOSNotificationDetails iOSPlatformChannelSpecifics =
-        IOSNotificationDetails(
-            // sound: 'example.mp3',
-            presentAlert: true,
-            presentBadge: true,
-            presentSound: true);
-    NotificationDetails platformChannelSpecifics = const NotificationDetails(
-      iOS: iOSPlatformChannelSpecifics,
-      android: null,
-    );
-    // await flutterLocalNotificationsPlugin.show(
-    //     0, 'title', 'body', platformChannelSpecifics);
   }
 
   List<Widget> albumDetail() {
@@ -104,33 +86,3 @@ class DetailDialog extends StatelessWidget {
     return value;
   }
 }
-
-// import 'package:awesome_dialog/awesome_dialog.dart';
-// import 'package:erichan/administrator/task_info.dart';
-// import 'package:flutter/material.dart';
-
-// class DetailDialog {
-//   DetailDialog(this.context);
-
-//   BuildContext context;
-//   void makePopUp(InfoBase info) {
-//     AwesomeDialog(
-//       context: context,
-//       borderSide: const BorderSide(
-//         color: Colors.green,
-//         width: 2,
-//       ),
-//       width: MediaQuery.of(context).size.width,
-//       buttonsBorderRadius: const BorderRadius.all(
-//         Radius.circular(2),
-//       ),
-//       headerAnimationLoop: false,
-//       animType: AnimType.BOTTOMSLIDE,
-//       title: info.title,
-//       desc:
-//           ('Dialog description here...usdhvuiavhakhvkldahfklvjhadjklffhljkdhvjlkhdzsfjkvhjklhljkhafsjkvhjkadhvjkdfhzjkchvjlkadfhvjkhajlvkfzhvljkhdajkvhljdkzhvjkfjlkHSDJKfhvljkdhvkljsdjkvhljkdafvljkdzjklxvhjklfdhvjkDSHzlkvhdflkhvjklajdfhklvjaklj'),
-//       showCloseIcon: true,
-//     ).show();
-//   }
-// }
-

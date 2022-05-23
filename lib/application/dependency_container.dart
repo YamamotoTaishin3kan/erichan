@@ -4,14 +4,6 @@ import 'package:erichan/main.dart';
 import 'package:erichan/user_auth/model/sign_in_screen_controller.dart';
 import 'package:flutter/material.dart';
 
-class DependencyInjector {
-  final DependencyContainer _container = DependencyContainer();
-
-  Widget getApplication() {
-    return _container.resolve<MyApp>();
-  }
-}
-
 class DependencyContainer {
   DependencyContainer();
   final Map<Type, Object> _container = {};
@@ -20,13 +12,11 @@ class DependencyContainer {
     return resolve<MyApp>();
   }
 
-  Widget resolve<T>() {
-    if (_container.containsKey(T)) {
-      return _container[T]! as Widget;
-    } else {
+  T resolve<T>() {
+    if (!_container.containsKey(T)) {
       register<T>();
-      return _container[T]! as Widget;
     }
+    return _container[T]! as T;
   }
 
   void register<T>() {
@@ -41,6 +31,7 @@ class DependencyContainer {
         _container[T] = AdministratorFacade.createAdministrator();
         break;
       default:
+        assert(true);
     }
   }
 }

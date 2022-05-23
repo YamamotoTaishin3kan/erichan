@@ -1,4 +1,6 @@
+import 'package:erichan/administrator/infrastructure/firestore_adapter.dart';
 import 'package:erichan/administrator/model/repository.dart';
+import 'package:erichan/application/firebase_auth_adapter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reorderables/reorderables.dart';
@@ -27,7 +29,12 @@ class AdministratorStructure extends StatelessWidget {
     Widget column = Column(children: <Widget>[cards]);
 
     return Scaffold(
-      appBar: AppBar(),
+      backgroundColor: Colors.white,
+      appBar: AppBar(backgroundColor: Colors.black, actions: [
+        IconButton(
+            onPressed: () => FirebaseAuthAdapter.signOut(),
+            icon: const Icon(Icons.logout))
+      ]),
       body: SingleChildScrollView(child: column),
       floatingActionButton: const CreateNewItemButton(),
     );
