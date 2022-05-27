@@ -2,14 +2,37 @@ import 'package:erichan/administrator/entities/task_info.dart';
 import 'package:erichan/administrator/infrastructure/firestore_adapter.dart';
 import 'package:erichan/application/notifications_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-// singleton
-Repository localRepository = Repository();
+class RepositoryListManager {
+  final List<Repository> _repositories = [Repository(FireStoreAdapter())];
+
+// providerで参照するRepositoryを固定する
+  Widget setsRepositoryToWidgetUnder(Widget child) {
+    return RepositoryLifeCycle(repository: _repositories.first, child: child);
+  }
+}
+
+class RepositoryLifeCycle extends StatelessWidget {
+  const RepositoryLifeCycle(
+      {Key? key, required this.child, required this.repository})
+      : super(key: key);
+  final Widget child;
+  final Repository repository;
+
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider.value(
+      value: repository,
+      child: child,
+    );
+  }
+}
 
 class Repository extends ChangeNotifier {
-  final adapter = FireStoreAdapter();
+  final FireStoreAdapter adapter;
 
-  Repository() {
+  Repository(this.adapter) {
     initialize();
   }
 

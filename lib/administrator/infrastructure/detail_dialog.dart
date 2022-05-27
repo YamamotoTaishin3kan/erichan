@@ -1,6 +1,7 @@
 import 'package:erichan/administrator/model/repository.dart';
 import 'package:erichan/application/notifications_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../application/app_define.dart';
 import '../entities/task_info.dart';
 
@@ -52,7 +53,7 @@ class DetailDialog extends StatelessWidget {
               ),
               onPressed: () {
                 Navigator.pop(context);
-                localRepository.remove(info);
+                Provider.of<Repository>(context).remove(info);
               },
             )),
       ),

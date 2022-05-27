@@ -37,6 +37,8 @@ class NotificationsManager {
     if (contents is AlbumInfo) return;
     TaskInfo taskInfo = contents as TaskInfo;
 
+    if (!taskInfo.deadline.haveTimeLeft()) return;
+
     return flutterLocalNotificationsPlugin.zonedSchedule(
         notificationID++,
         taskInfo.deadline.getTimeLeft(),

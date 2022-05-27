@@ -1,12 +1,13 @@
 import 'package:erichan/administrator/infrastructure/detail_dialog.dart';
 import 'package:erichan/administrator/entities/task_info.dart';
 import 'package:erichan/application/app_define.dart';
+import 'package:erichan/application/palette.dart';
 import 'package:flutter/material.dart';
 
 class EriCard extends StatelessWidget {
   EriCard({Key? key, required this.info}) : super(key: key);
   final InfoBase info;
-  final Color color = Palette.nextColor();
+  final Color color = Palette.getColor();
 
   @override
   Widget build(BuildContext context) {
@@ -48,17 +49,35 @@ class TaskCardBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      StandardText(info.title, fontSize: 20, color: Colors.white),
-      SizedBox(
-          width: MediaQuery.of(context).size.width,
-          child: Text(
-            info.deadline.getTimeLeft(),
-            textAlign: TextAlign.right,
-            style:
-                const StandardTextStyle(color: Color.fromARGB(255, 226, 15, 0)),
-          )),
-    ]);
+    return Container(
+      color: Colors.white,
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height / 10,
+      child: Row(
+        children: [
+          Flexible(
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width * 7 / 10,
+              child: Center(
+                child:
+                    StandardText(info.title, fontSize: 20, color: Colors.black),
+              ),
+            ),
+          ),
+          Container(width: MediaQuery.of(context).size.width / 10),
+          Container(
+            alignment: Alignment.bottomCenter,
+            width: MediaQuery.of(context).size.width * 2 / 10,
+            child: Text(
+              info.deadline.getTimeLeft(),
+              textAlign: TextAlign.right,
+              style: const StandardTextStyle(
+                  fontSize: 11, color: Color.fromARGB(255, 226, 15, 0)),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 
@@ -68,29 +87,5 @@ class AlbumCardBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Text("これは未実装アルバムです");
-  }
-}
-
-class Palette {
-  static Color _itemColor = Colors.red;
-  static Color nextColor() {
-    if (_itemColor == Colors.red) {
-      _itemColor = Colors.orange;
-    } else if (_itemColor == Colors.orange) {
-      _itemColor = Colors.yellow;
-    } else if (_itemColor == Colors.yellow) {
-      _itemColor = Colors.greenAccent;
-    } else if (_itemColor == Colors.greenAccent) {
-      _itemColor = Colors.green;
-    } else if (_itemColor == Colors.green) {
-      _itemColor = Colors.blueAccent;
-    } else if (_itemColor == Colors.blueAccent) {
-      _itemColor = Colors.purple;
-    } else if (_itemColor == Colors.purple) {
-      _itemColor = Colors.pinkAccent;
-    } else if (_itemColor == Colors.pinkAccent) {
-      _itemColor = Colors.red;
-    }
-    return _itemColor;
   }
 }

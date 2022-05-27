@@ -1,17 +1,19 @@
-import 'package:erichan/administrator/model/repository.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+// import 'package:erichan/administrator/model/repository.dart';
+// import 'package:flutter/material.dart';
+// import 'package:provider/provider.dart';
 
-class AdministratorLifeCycle extends StatelessWidget {
-  const AdministratorLifeCycle({Key? key, required this.child})
-      : super(key: key);
-  final Widget child;
+// class RepositoryLifeCycle extends StatelessWidget {
+//   const RepositoryLifeCycle(
+//       {Key? key, required this.child, required this.repository})
+//       : super(key: key);
+//   final Widget child;
+//   final Repository repository;
 
-  @override
-  Widget build(BuildContext context) {
-    return ChangeNotifierProvider.value(
-      value: localRepository,
-      child: child,
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return ChangeNotifierProvider.value(
+//       value: repository,
+//       child: child,
+//     );
+//   }
+// }

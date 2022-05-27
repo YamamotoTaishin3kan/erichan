@@ -1,5 +1,6 @@
 import 'package:erichan/administrator/application/administrator_facade.dart';
 import 'package:erichan/administrator/model/administrator.dart';
+import 'package:erichan/administrator/model/repository.dart';
 import 'package:erichan/main.dart';
 import 'package:erichan/user_auth/model/sign_in_screen_controller.dart';
 import 'package:flutter/material.dart';

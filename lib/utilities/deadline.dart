@@ -6,12 +6,20 @@ class Deadline {
 
   final DateTime dateTime;
 
+  bool haveTimeLeft() {
+    return dateTime.isAfter(DateTime.now());
+  }
+
   String getTimeLeft() {
     Duration timeLeft = toDuration();
     if (timeLeft.inDays > 0) {
       return "残り　" + daysLeft(timeLeft);
+    } else if (timeLeft.inHours > 0) {
+      return "残り　" + hoursLeft(timeLeft);
+    } else if (timeLeft.inMinutes > 0) {
+      return "残り　" + minutesLeft(timeLeft);
     } else {
-      return "残り　" + hourLeft(timeLeft);
+      return "過ぎています";
     }
   }
 
@@ -23,7 +31,11 @@ class Deadline {
     return timeLeft.inDays.toString() + "日";
   }
 
-  String hourLeft(Duration timeLeft) {
+  String hoursLeft(Duration timeLeft) {
     return timeLeft.inHours.toString() + "時間";
+  }
+
+  String minutesLeft(Duration timeLeft) {
+    return timeLeft.inMinutes.toString() + "分";
   }
 }

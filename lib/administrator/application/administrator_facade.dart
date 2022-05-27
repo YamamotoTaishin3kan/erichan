@@ -3,5 +3,5 @@ import 'package:flutter/material.dart';
 
 class AdministratorFacade {
   AdministratorFacade();
-  static Widget createAdministrator() => const Administrator();
+  static Widget createAdministrator() => Administrator();
 }

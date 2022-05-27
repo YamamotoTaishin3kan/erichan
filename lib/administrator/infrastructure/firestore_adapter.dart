@@ -1,13 +1,40 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:erichan/administrator/entities/task_info.dart';
+import 'package:erichan/application/firebase_auth_adapter.dart';
 import 'package:erichan/utilities/deadline.dart';
 
 class FireStoreAdapter {
-  final repositoryCollection =
+  final _repositoryCollection =
       FirebaseFirestore.instance.collection("repository");
+  final _usersCollection = FirebaseFirestore.instance.collection("users");
+
+  final _remoteRepositories =
+      FirebaseFirestore.instance.collection("repositories");
+
+  void registerMyself() {
+    Map<String, String> userInfo = {
+      'uniqueID': FirebaseAuthAdapter.getUserUID()
+    };
+
+    _usersCollection.doc(FirebaseAuthAdapter.getUserUID()).set(userInfo);
+    FirebaseAuthAdapter.getUserUID();
+  }
+
+  void createRepository() {
+    String newRepositoryID = _remoteRepositories.doc().id;
+
+    _usersCollection
+        .doc(FirebaseAuthAdapter.getUserUID())
+        .set({'Repository': newRepositoryID});
+
+    Map<String, dynamic> newRepository = {'newRepositoryID': newRepositoryID};
+
+    _remoteRepositories.doc(newRepositoryID).set(newRepository);
+    _remoteRepositories.doc(newRepositoryID).collection("repository");
+  }
 
   Future<List<TaskInfo>> getRepository() async {
-    final QuerySnapshot snapshot = await repositoryCollection.get();
+    final QuerySnapshot snapshot = await _repositoryCollection.get();
 
     return snapshot.docs.map((document) {
       Map<String, dynamic> remoteItem = document.data() as Map<String, dynamic>;
@@ -42,12 +69,12 @@ class FireStoreAdapter {
     };
 
     DocumentReference<Map<String, dynamic>> newItemDocument =
-        await repositoryCollection.add(data);
+        await _repositoryCollection.add(data);
 
     newItem.docID = newItemDocument.id;
   }
 
   void deleteItem(TaskInfo deleteItem) {
-    repositoryCollection.doc(deleteItem.docID).delete();
+    _repositoryCollection.doc(deleteItem.docID).delete();
   }
 }

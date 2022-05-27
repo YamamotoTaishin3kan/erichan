@@ -39,6 +39,6 @@ class MyApp extends StatelessWidget {
             create: (context) => EventBus(),
             dispose: (context, bus) => bus.dispose(),
             child: child),
-        theme: ThemeData(primarySwatch: Colors.orange));
+        theme: ThemeData(primarySwatch: Colors.lightGreen));
   }
 }
