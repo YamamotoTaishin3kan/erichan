@@ -33,9 +33,9 @@ class NotificationsManager {
     flutterLocalNotificationsPlugin.cancelAll();
   }
 
-  static Future<void> setNotification(InfoBase contents) async {
-    if (contents is AlbumInfo) return;
-    TaskInfo taskInfo = contents as TaskInfo;
+  static Future<void> setNotification(Item contents) async {
+    if (contents is Album) return;
+    Task taskInfo = contents as Task;
 
     if (!taskInfo.deadline.haveTimeLeft()) return;
 
@@ -50,5 +50,5 @@ class NotificationsManager {
             UILocalNotificationDateInterpretation.absoluteTime);
   }
 
-  static Future<void> deleteNotification(InfoBase contents) async {}
+  static Future<void> deleteNotification(Item contents) async {}
 }

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class EriCard extends StatelessWidget {
   EriCard({Key? key, required this.info}) : super(key: key);
-  final InfoBase info;
+  final Item info;
   final Color color = Palette.getColor();
 
   @override
@@ -33,10 +33,10 @@ class EriCard extends StatelessWidget {
 }
 
 class EriCardBodyBuilder {
-  static Widget create(InfoBase info) {
-    if (info is TaskInfo) {
+  static Widget create(Item info) {
+    if (info is Task) {
       return TaskCardBody(info);
-    } else if (info is AlbumInfo) {
+    } else if (info is Album) {
       return AlbumCardBody(info);
     }
     return const Text("EriCardBodyBuilderError");
@@ -45,7 +45,7 @@ class EriCardBodyBuilder {
 
 class TaskCardBody extends StatelessWidget {
   const TaskCardBody(this.info, {Key? key}) : super(key: key);
-  final TaskInfo info;
+  final Task info;
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +83,7 @@ class TaskCardBody extends StatelessWidget {
 
 class AlbumCardBody extends StatelessWidget {
   const AlbumCardBody(this.info, {Key? key}) : super(key: key);
-  final AlbumInfo info;
+  final Album info;
   @override
   Widget build(BuildContext context) {
     return const Text("これは未実装アルバムです");

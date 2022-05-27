@@ -33,7 +33,7 @@ class FireStoreAdapter {
     _remoteRepositories.doc(newRepositoryID).collection("repository");
   }
 
-  Future<List<TaskInfo>> getRepository() async {
+  Future<List<Task>> getRepository() async {
     final QuerySnapshot snapshot = await _repositoryCollection.get();
 
     return snapshot.docs.map((document) {
@@ -45,7 +45,7 @@ class FireStoreAdapter {
       int month = remoteItem["item"]["dateTime"]["month"];
       int year = remoteItem["item"]["dateTime"]["year"];
 
-      return TaskInfo(
+      return Task(
           title: remoteItem["item"]["title"],
           detail: remoteItem["item"]["detail"],
           deadline: Deadline(DateTime(year, month, day, hour, minute)),
@@ -53,7 +53,7 @@ class FireStoreAdapter {
     }).toList();
   }
 
-  void pushNewItem(TaskInfo newItem) async {
+  void pushNewItem(Task newItem) async {
     Map<String, dynamic> data = {
       'item': {
         'title': newItem.title,
@@ -74,7 +74,7 @@ class FireStoreAdapter {
     newItem.docID = newItemDocument.id;
   }
 
-  void deleteItem(TaskInfo deleteItem) {
+  void deleteItem(Task deleteItem) {
     _repositoryCollection.doc(deleteItem.docID).delete();
   }
 }

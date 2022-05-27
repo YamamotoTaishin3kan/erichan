@@ -1,4 +1,4 @@
-import 'package:erichan/administrator/model/repository.dart';
+import 'package:erichan/administrator/model/repository_list_manager.dart';
 import 'package:erichan/application/firebase_auth_adapter.dart';
 import 'package:erichan/application/palette.dart';
 import 'package:flutter/material.dart';

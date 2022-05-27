@@ -1,5 +1,4 @@
 import 'package:erichan/administrator/model/repository.dart';
-import 'package:erichan/application/notifications_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../application/app_define.dart';
@@ -9,7 +8,7 @@ class DetailDialog extends StatelessWidget {
   const DetailDialog({Key? key, required this.info, this.color = Colors.black})
       : super(key: key);
 
-  final InfoBase info;
+  final Item info;
   final Color color;
 
   @override
@@ -25,9 +24,9 @@ class DetailDialog extends StatelessWidget {
   }
 
   List<Widget> detailDialogBody(BuildContext context) {
-    if (info is TaskInfo) {
+    if (info is Task) {
       return taskDetail(context);
-    } else if (info is AlbumInfo) {
+    } else if (info is Album) {
       return albumDetail();
     } else {
       return [const Text("detailDialogBodyError")];
@@ -39,7 +38,7 @@ class DetailDialog extends StatelessWidget {
       Center(
         child: Padding(
             padding: const EdgeInsets.all(16),
-            child: Text((info as TaskInfo).detail)),
+            child: Text((info as Task).detail)),
       ),
       Center(
         child: SizedBox(
@@ -67,8 +66,7 @@ class DetailDialog extends StatelessWidget {
         child: Padding(
             padding: const EdgeInsets.all(16),
             child: GridView.extent(
-                maxCrossAxisExtent: 100,
-                children: (info as AlbumInfo).pictures)),
+                maxCrossAxisExtent: 100, children: (info as Album).pictures)),
       ),
       Center(
         child: SizedBox(

@@ -13,7 +13,7 @@ class WidgetToCreateNewItem extends StatelessWidget {
       : super(key: key);
 
   void _pushed(Repository repository) {
-    TaskInfo newInfo = TaskInfo(
+    Task newInfo = Task(
         title: _titleInputForm.text,
         detail: _itemDetailsInputForm.text,
         deadline: Deadline(_dayAndTimePickerKey.currentState?.time ?? today),

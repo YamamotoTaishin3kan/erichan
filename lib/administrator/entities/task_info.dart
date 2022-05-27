@@ -1,15 +1,15 @@
 import 'package:erichan/utilities/deadline.dart';
 import 'package:flutter/material.dart';
 
-abstract class InfoBase {
-  InfoBase({required this.title, required this.docID});
+abstract class Item {
+  Item({required this.title, required this.docID});
 
   String title;
   String docID;
 }
 
-class TaskInfo extends InfoBase {
-  TaskInfo({
+class Task extends Item {
+  Task({
     required title,
     required this.detail,
     required this.deadline,
@@ -20,8 +20,8 @@ class TaskInfo extends InfoBase {
   final Deadline deadline;
 }
 
-class AlbumInfo extends InfoBase {
-  AlbumInfo({required title, required docID, travelDate})
+class Album extends Item {
+  Album({required title, required docID, travelDate})
       : super(title: title, docID: docID);
 
   DateTime travelDate = today;
