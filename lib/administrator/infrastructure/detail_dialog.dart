@@ -1,15 +1,19 @@
 import 'package:erichan/administrator/model/repository.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../application/app_define.dart';
 import '../entities/task_info.dart';
 
 class DetailDialog extends StatelessWidget {
-  const DetailDialog({Key? key, required this.info, this.color = Colors.black})
+  const DetailDialog(
+      {Key? key,
+      required this.info,
+      this.color = Colors.black,
+      required this.repository})
       : super(key: key);
 
   final Item info;
   final Color color;
+  final Repository repository;
 
   @override
   Widget build(BuildContext context) {
@@ -19,13 +23,13 @@ class DetailDialog extends StatelessWidget {
         side: BorderSide(color: color, width: 2),
         borderRadius: BorderRadius.circular(10),
       ),
-      children: detailDialogBody(context),
+      children: detailDialogBody(context, repository),
     );
   }
 
-  List<Widget> detailDialogBody(BuildContext context) {
+  List<Widget> detailDialogBody(BuildContext context, Repository repository) {
     if (info is Task) {
-      return taskDetail(context);
+      return taskDetail(context, repository);
     } else if (info is Album) {
       return albumDetail();
     } else {
@@ -33,7 +37,7 @@ class DetailDialog extends StatelessWidget {
     }
   }
 
-  List<Widget> taskDetail(BuildContext context) {
+  List<Widget> taskDetail(BuildContext context, Repository repository) {
     List<Widget> value = [
       Center(
         child: Padding(
@@ -52,7 +56,7 @@ class DetailDialog extends StatelessWidget {
               ),
               onPressed: () {
                 Navigator.pop(context);
-                Provider.of<Repository>(context).remove(info);
+                repository.remove(info);
               },
             )),
       ),

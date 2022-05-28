@@ -47,7 +47,9 @@ class CreateNewItemButton extends StatelessWidget {
       onPressed: () {
         showDialog<void>(
           context: context,
-          builder: (_) => WidgetToCreateNewItem(),
+          // contextでrepositoryを渡せないため、渡す必要がある
+          builder: (_) => WidgetToCreateNewItem(
+              repository: Provider.of<Repository>(context)),
         );
       },
     );

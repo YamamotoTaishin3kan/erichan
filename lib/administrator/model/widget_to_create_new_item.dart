@@ -5,14 +5,14 @@ import 'package:erichan/administrator/infrastructure/title_input_form.dart';
 import 'package:erichan/administrator/model/repository.dart';
 import 'package:erichan/utilities/deadline.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class WidgetToCreateNewItem extends StatelessWidget {
-  WidgetToCreateNewItem({Key? key, this.color = Colors.black})
+  WidgetToCreateNewItem(
+      {Key? key, this.color = Colors.black, required this.repository})
       : super(key: key);
 
-  void _pushed(Repository repository) {
+  void _pushed() {
     Task newInfo = Task(
         title: _titleInputForm.text,
         detail: _itemDetailsInputForm.text,
@@ -22,6 +22,7 @@ class WidgetToCreateNewItem extends StatelessWidget {
   }
 
   final Color color;
+  final Repository repository;
   final TitleInputForm _titleInputForm = TitleInputForm();
   final ItemDetailsInputForm _itemDetailsInputForm = ItemDetailsInputForm();
   late GlobalObjectKey<DayAndTimePickerState> _dayAndTimePickerKey;
@@ -67,7 +68,7 @@ class WidgetToCreateNewItem extends StatelessWidget {
 class ConfirmButton extends StatelessWidget {
   const ConfirmButton({Key? key, required this.onPressed}) : super(key: key);
 
-  final void Function(Repository repository) onPressed;
+  final void Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -82,8 +83,7 @@ class ConfirmButton extends StatelessWidget {
               shape: const StadiumBorder(),
             ),
             onPressed: () {
-              Repository repository = Provider.of<Repository>(context);
-              onPressed(repository);
+              onPressed();
               Navigator.pop(context);
             },
           )),

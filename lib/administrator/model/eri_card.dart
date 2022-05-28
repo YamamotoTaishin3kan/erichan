@@ -1,8 +1,10 @@
 import 'package:erichan/administrator/infrastructure/detail_dialog.dart';
 import 'package:erichan/administrator/entities/task_info.dart';
+import 'package:erichan/administrator/model/repository.dart';
 import 'package:erichan/application/app_define.dart';
 import 'package:erichan/application/palette.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class EriCard extends StatelessWidget {
   EriCard({Key? key, required this.info}) : super(key: key);
@@ -24,7 +26,10 @@ class EriCard extends StatelessWidget {
           onPressed: () {
             showDialog<void>(
               context: context,
-              builder: (_) => DetailDialog(info: info, color: color),
+              builder: (_) => DetailDialog(
+                  info: info,
+                  color: color,
+                  repository: Provider.of<Repository>(context)),
             );
           },
           child: EriCardBodyBuilder.create(info)),
