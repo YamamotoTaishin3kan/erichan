@@ -46,6 +46,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_local_notifications: ^9.5.2
+  circular_bottom_navigation: ^2.0.0
 
 dev_dependencies:
   flutter_test:

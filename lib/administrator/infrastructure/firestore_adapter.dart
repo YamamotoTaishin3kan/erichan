@@ -30,7 +30,8 @@ class FireStoreAdapter {
     Map<String, dynamic> newRepository = {'newRepositoryID': newRepositoryID};
 
     _remoteRepositories.doc(newRepositoryID).set(newRepository);
-    _remoteRepositories.doc(newRepositoryID).collection("repository");
+
+    //_remoteRepositories.doc(newRepositoryID).collection("repository");
   }
 
   Future<List<Task>> getRepository() async {

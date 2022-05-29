@@ -14,15 +14,17 @@ class Repository extends ChangeNotifier {
 
   void initialize() async {
     List<Task> future = await adapter.getRepository();
-
     infos = future;
 
     NotificationsManager.deleteAllNotifications();
     for (Item info in infos) {
       await NotificationsManager.setNotification(info);
     }
-
     notifyListeners();
+  }
+
+  String getRepositoryName() {
+    return "Repository1";
   }
 
   void changePriority(int oldIndex, int newIndex) {

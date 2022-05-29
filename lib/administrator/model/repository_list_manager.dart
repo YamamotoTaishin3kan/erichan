@@ -6,9 +6,18 @@ import 'package:provider/provider.dart';
 class RepositoryListManager {
   final List<Repository> _repositories = [Repository(FireStoreAdapter())];
 
+  List<String> getReositoryNames() {
+    List<String> list = [];
+    for (var element in _repositories) {
+      list.add(element.getRepositoryName());
+    }
+    return list;
+  }
+
 // providerで参照するRepositoryを固定する
-  Widget setsRepositoryToWidgetUnder(Widget child) {
-    return RepositoryLifeCycle(repository: _repositories.first, child: child);
+  Widget setsRepositoryToWidgetUnder(Widget child, int number) {
+    assert(_repositories.length >= number);
+    return RepositoryLifeCycle(repository: _repositories[number], child: child);
   }
 }
 
