@@ -1,4 +1,4 @@
-import 'package:erichan/administrator/entities/task_info.dart';
+import 'package:erichan/administrator/entities/task.dart';
 import 'package:erichan/administrator/infrastructure/item_details_input_form.dart';
 import 'package:erichan/administrator/infrastructure/day_and_time_picker.dart';
 import 'package:erichan/administrator/infrastructure/title_input_form.dart';
@@ -14,10 +14,10 @@ class WidgetToCreateNewItem extends StatelessWidget {
 
   void _pushed() {
     Task newInfo = Task(
-        title: _titleInputForm.text,
-        detail: _itemDetailsInputForm.text,
-        deadline: Deadline(_dayAndTimePickerKey.currentState?.time ?? today),
-        docID: "FireStoreDon'tKnow");
+      title: _titleInputForm.text,
+      detail: _itemDetailsInputForm.text,
+      deadline: Deadline(_dayAndTimePickerKey.currentState?.time ?? today),
+    );
     repository.addNewInfo(newInfo);
   }
 

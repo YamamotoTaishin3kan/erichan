@@ -1,7 +1,7 @@
 import 'package:erichan/administrator/model/repository.dart';
 import 'package:flutter/material.dart';
 import '../../application/app_define.dart';
-import '../entities/task_info.dart';
+import '../entities/task.dart';
 
 class DetailDialog extends StatelessWidget {
   const DetailDialog(

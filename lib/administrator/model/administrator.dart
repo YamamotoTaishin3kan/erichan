@@ -2,20 +2,37 @@ import 'package:circular_bottom_navigation/circular_bottom_navigation.dart';
 import 'package:circular_bottom_navigation/tab_item.dart';
 import 'package:erichan/administrator/infrastructure/createRepository.dart';
 import 'package:erichan/administrator/model/administrator_structure.dart';
+import 'package:erichan/administrator/model/body_tab_pair_list.dart';
 import 'package:erichan/administrator/model/repository_list_manager.dart';
 import 'package:erichan/application/firebase_auth_adapter.dart';
 import 'package:erichan/application/palette.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Administrator extends StatelessWidget {
-  final RepositoryListManager repositoryList = RepositoryListManager();
-  Administrator({Key? key}) : super(key: key);
+  const Administrator(this.body, {Key? key}) : super(key: key);
+  final Widget body;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AdministratorAppBar(),
-      body: AdministratorBody(),
+      body: body,
+    );
+  }
+}
+
+class RepositoryManagerLifeCycle extends StatelessWidget {
+  const RepositoryManagerLifeCycle(this.child, this.repositoryList, {Key? key})
+      : super(key: key);
+  final Widget child;
+  final RepositoryListManager repositoryList;
+
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider.value(
+      value: repositoryList,
+      child: child,
     );
   }
 }
@@ -30,8 +47,8 @@ class AdministratorAppBar extends AppBar {
 }
 
 class AdministratorBody extends StatefulWidget {
-  AdministratorBody({Key? key}) : super(key: key);
-  final RepositoryListManager repositoryList = RepositoryListManager();
+  const AdministratorBody({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => AdministratorBodyState();
 }
@@ -39,7 +56,6 @@ class AdministratorBody extends StatefulWidget {
 class AdministratorBodyState extends State<AdministratorBody> {
   int selectedPos = 0;
   double bottomNavBarHeight = 60;
-
   late CircularBottomNavigationController _navigationController;
 
   @override
@@ -55,52 +71,25 @@ class AdministratorBodyState extends State<AdministratorBody> {
   }
 
   void changeRepositoryView(int? value) {
-    setState(() {
-      assert(value != null);
-      selectedPos = value!;
-    });
+    setState(() => selectedPos = value!);
   }
 
   @override
   Widget build(BuildContext context) {
-    Widget repositoryView;
-    if (selectedPos == 0) {
-      repositoryView = CreateRepository();
-    } else {
-      int repositoryPos = selectedPos - 1;
-      repositoryView = widget.repositoryList
-          .setsRepositoryToWidgetUnder(const RepositoryView(), repositoryPos);
-    }
+    // RepositoryListManagerが更新された場合ここが変わる
+    BodyTabPairList bodyAndTab =
+        BodyTabPairList(Provider.of<RepositoryListManager>(context));
 
-    TabItemsCreator tabItemsCreator =
-        TabItemsCreator(widget.repositoryList.getReositoryNames());
+    MapEntry<Widget, TabItem> pair = bodyAndTab.pairList[selectedPos];
+    Widget body = pair.key;
 
     return Scaffold(
-      body: repositoryView,
+      body: body,
       bottomNavigationBar: CircularBottomNavigation(
-        tabItemsCreator.getTabItemList(),
+        bodyAndTab.getTabItems(),
         controller: _navigationController,
         selectedCallback: changeRepositoryView,
       ),
     );
-  }
-}
-
-class TabItemsCreator {
-  TabItemsCreator(List<String> names) {
-    for (String name in names) {
-      items.add(TabItem(Icons.home, name, Palette.getColor(),
-          labelStyle: const TextStyle(fontWeight: FontWeight.normal)));
-    }
-  }
-
-  int selectedPos = 0;
-  final List<TabItem> items = [
-    TabItem(Icons.create, "Create", Palette.getColor(),
-        labelStyle: const TextStyle(fontWeight: FontWeight.normal))
-  ];
-
-  List<TabItem> getTabItemList() {
-    return items;
   }
 }

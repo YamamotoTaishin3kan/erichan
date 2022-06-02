@@ -1,5 +1,5 @@
 import 'package:erichan/administrator/infrastructure/detail_dialog.dart';
-import 'package:erichan/administrator/entities/task_info.dart';
+import 'package:erichan/administrator/entities/task.dart';
 import 'package:erichan/administrator/model/repository.dart';
 import 'package:erichan/application/app_define.dart';
 import 'package:erichan/application/palette.dart';

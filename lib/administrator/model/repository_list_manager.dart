@@ -3,8 +3,27 @@ import 'package:erichan/administrator/model/repository.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class RepositoryListManager {
-  final List<Repository> _repositories = [Repository(FireStoreAdapter())];
+class RepositoryListManager extends ChangeNotifier {
+  final FireStoreAdapter adapter;
+  final List<Repository> _repositories = [];
+
+  RepositoryListManager(this.adapter);
+
+  void createRepository() {
+    String repositoryKey = adapter.createRepository();
+    _repositories.add(Repository(adapter, repositoryKey));
+    notifyListeners();
+  }
+
+  Future<void> setRepositories() async {
+    List<String> keys = await getReositoryKeys();
+    for (String key in keys) {
+      _repositories.add(Repository(adapter, key));
+    }
+  }
+
+  Future<List<String>> getReositoryKeys() async =>
+      FireStoreAdapter().getMyRepositoryKeys();
 
   List<String> getReositoryNames() {
     List<String> list = [];

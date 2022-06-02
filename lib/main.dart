@@ -12,11 +12,22 @@ void main() async {
 
   DependencyContainer container = DependencyContainer();
 
-  NotificationsManager.initialize();
+  AsyncProcess asyncProcess = AsyncProcess(container);
+  await asyncProcess.endFirst();
 
   Object application = container.getApplication();
   application = application as Widget;
   runApp(application);
+}
+
+// 自分なりに考えたことなので、誤っている可能性あり
+class AsyncProcess {
+  AsyncProcess(this.container);
+  final DependencyContainer container;
+  Future<void> endFirst() async {
+    NotificationsManager.initialize();
+    await container.getRepositoryListManager().setRepositories();
+  }
 }
 
 class MyApp extends StatelessWidget {
